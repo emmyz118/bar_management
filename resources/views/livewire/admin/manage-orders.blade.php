@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach($orders as $order)
                     <tr>
-                        <td>{{ $order->beverage_id }}</td>
+                        <td>{{ $order->name }}</td>
                         <td>{{ $order->client_name }}</td>
                         <td>{{ $order->telephone }}</td>
                         <td>{{ $order->location }}</td>
@@ -44,59 +44,6 @@
         </div>
     </div>
 
-    <!-- Add/Edit Order Modal -->
-    <div class="modal fade" id="addOrderModal" tabindex="-1" role="dialog" aria-labelledby="addOrderModalLabel"
-        aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addOrderModalLabel">{{ $isEditMode ? 'Edit Order' : 'Add Order' }}
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form wire:submit.prevent="{{ $isEditMode ? 'updateOrder' : 'saveOrder' }}">
-                        <div class="form-group">
-                            <label for="client_name">Client Name</label>
-                            <input type="text" class="form-control" id="client_name" wire:model="client_name">
-                            @error('client_name') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="beverage_id">Beverage</label>
-                            <select class="form-control" id="beverage_id" wire:model="beverage_id">
-                                <option value="">Select Beverage</option>
-                                @foreach($beverages as $beverage)
-                                <option value="{{ $beverage->id }}">{{ $beverage->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('beverage_id') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="table_id">Table</label>
-                            <select class="form-control" id="table_id" wire:model="table_id">
-                                <option value="">Select Table</option>
-                                @foreach($tables as $table)
-                                <option value="{{ $table->id }}">{{ $table->number }}</option>
-                                @endforeach
-                            </select>
-                            @error('table_id') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" id="status" wire:model="status">
-                                <option value="pending">Pending</option>
-                                <option value="completed">Completed</option>
-                                <option value="canceled">Canceled</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <button type="submit" class="btn btn-primary">{{ $isEditMode ? 'Update' : 'Save' }}</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <livewire:footer />
 </div>

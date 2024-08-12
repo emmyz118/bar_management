@@ -91,10 +91,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Beverages</a>
+                    <a class="nav-link" href="{{route("client.beverages")}}" wire:navigate>Beverages</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tables</a>
+                    <a class="nav-link" href="{{route("client.tables")}}" wire:navigate>Tables</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Order</a>

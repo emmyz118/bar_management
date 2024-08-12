@@ -48,7 +48,11 @@
                     @endforeach
                 </tbody>
             </table>
+
+            {{$beverages->links()}}
+            <br><br><br>
         </div>
+
     </div>
 
     <!-- Add/Edit Beverage Modal -->

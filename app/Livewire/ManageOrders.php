@@ -23,10 +23,10 @@ class ManageOrders extends Component
     public function render()
     {
         
-        $beverages = Beverage::all();
-        $tables = Table::all();
-        $orders=Order::all();
-        return view('livewire.admin.manage-orders', compact('orders', 'beverages', 'tables'));
+      $orders = Order::join('beverages', 'orders.beverage_id', '=', 'beverages.id')
+    ->select('beverages.name', 'orders.*')
+    ->get();
+        return view('livewire.admin.manage-orders', compact('orders'));
     }
 
     public function saveOrder()

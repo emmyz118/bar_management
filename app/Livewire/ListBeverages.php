@@ -45,6 +45,7 @@ class ListBeverages extends Component
         $this->reset(['client_name', 'telephone', 'location', 'beverage_id']);
 
         session()->flash('message', 'Order placed successfully.');
+        $this->redirect(route("client.beverages"),navigate:true );
     }
     public function ass(){
     $this->onebev=$this->beverage_id;

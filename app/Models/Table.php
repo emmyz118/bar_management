@@ -9,7 +9,9 @@ class Table extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'number',
+        'type',
         'capacity',
+        'price',
+        'image'
     ];
 }

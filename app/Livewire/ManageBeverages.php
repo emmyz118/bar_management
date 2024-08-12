@@ -19,7 +19,7 @@ class ManageBeverages extends Component
 
     public function render()
     {
-        $beverages = Beverage::where('name','like',"%".$this->search."%")->get();
+        $beverages = Beverage::where('name','like',"%".$this->search."%")->paginate(4);
         return view('livewire.admin.manage-beverages', compact('beverages'));
     }
 

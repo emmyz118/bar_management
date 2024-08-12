@@ -28,8 +28,8 @@
         </div>
         </header>
     </div>
-    <div class="row justify-center text-justify">
-        hello
+    <div class="row mt-5 justify-center text-justify">
+        welcome to BMS Login to get access.
     </div>
 </body>
 
