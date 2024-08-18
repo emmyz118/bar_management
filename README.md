@@ -1,6 +1,7 @@
 **Bar Management System Web Application**
 
 **Introduction**
+
 The Bar Management System is a web application built with Laravel and Livewire, designed to streamline bar operations and enhance the customer experience. It provides an intuitive interface for managing beverages, tables, orders, and reservations.
 
 **Key Features**
