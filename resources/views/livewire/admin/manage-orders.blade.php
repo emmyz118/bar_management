@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 class="mt-4">Manage Orders</h1>
+    <h1 class="m-4 ">Manage Orders</h1>
 
     @if (session()->has('message'))
     <div class="alert alert-success">
@@ -19,7 +19,8 @@
                         <th>Beverage</th>
                         <th>Client Name</th>
                         <th>Phone</th>
-                        <th>Beverage</th>
+                        <th>Client_address</th>
+                        <th>date_ordered</th>
                         <th>Order status</th>
                         <th>Actions</th>
                     </tr>
@@ -31,10 +32,17 @@
                         <td>{{ $order->client_name }}</td>
                         <td>{{ $order->telephone }}</td>
                         <td>{{ $order->location }}</td>
+                        <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                         <td>{{$order->status}}</td>
+
                         <td>
-                            <button class="btn btn-info" wire:click="editOrder({{ $order->id }})">Complete</button>
-                            <button class="btn btn-warning" wire:click="editOrder({{ $order->id }})">Reject</button>
+                            @if ($order->status=="Pending")
+                            <button class="btn btn-info"
+                                wire:click="completeReservation({{ $order->id }})">Complete</button>
+                            <button class="btn btn-warning"
+                                wire:click="rejectReservation({{ $order->id }})">Reject</button>
+                            @endif
+
                             <button class="btn btn-danger" wire:click="deleteOrder({{ $order->id }})">Delete</button>
                         </td>
                     </tr>

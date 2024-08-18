@@ -1,5 +1,8 @@
 <div class="container-fluid">
-    <h1 class="mt-4">Manage Reservations</h1>
+
+    </h1>
+    <h1 class="m-4 ">Manage Reservations </h1>
+
 
     @if (session()->has('message'))
     <div class="alert alert-success">
@@ -10,30 +13,44 @@
         <div class="card-header">
             <i class="fas fa-calendar-check mr-1"></i>
             Reservations List
-            <button class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#addReservationModal">Add
-                Reservation</button>
+
         </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>Table type</th>
                         <th>Client Name</th>
-                        <th>Table</th>
+                        <th>Client_phone</th>
                         <th>Reservation Date</th>
+                        <th>Reservation Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($reservations as $reservation)
                     <tr>
+                        <td>{{ $reservation->type }}</td>
                         <td>{{ $reservation->client_name }}</td>
-                        <td>{{ $reservation->table->number }}</td>
-                        <td>{{ $reservation->reservation_date->format('Y-m-d H:i') }}</td>
+                        <td>{{ $reservation->telephone }}</td>
+
+
+                        <td>{{ $reservation->created_at->format('Y-m-d H:i') }}</td>
+                        <td>{{ $reservation->status}}</td>
+
                         <td>
-                            <button class="btn btn-warning" wire:click="editReservation({{ $reservation->id }})"
-                                data-toggle="modal" data-target="#addReservationModal">Edit</button>
+                            @if ($reservation->status=="Pending")
+                            <button class="btn btn-info"
+                                wire:confirm="Are you sure you want to complete this reservation now?"
+                                wire:click="completeReservation({{ $reservation->id }})">Complete</button>
+                            <button class="btn btn-warning"
+                                wire:confirm="Are you sure you want to reject this reservation ?"
+                                wire:click="rejectReservation({{ $reservation->id }})">Reject</button>
+                            @endif
+
                             <button class="btn btn-danger"
-                                wire:click="deleteReservation({{ $reservation->id }})">Delete</button>
+                                wire:confirm="Are you sure you want to delete this reservation ?"
+                                wire:click="deleteOrder({{ $reservation->id }})">Delete</button>
                         </td>
                     </tr>
                     @endforeach
@@ -42,46 +59,6 @@
         </div>
     </div>
 
-    <!-- Add/Edit Reservation Modal -->
-    <div class="modal fade" id="addReservationModal" tabindex="-1" role="dialog"
-        aria-labelledby="addReservationModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addReservationModalLabel">
-                        {{ $isEditMode ? 'Edit Reservation' : 'Add Reservation' }}</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form wire:submit.prevent="{{ $isEditMode ? 'updateReservation' : 'saveReservation' }}">
-                        <div class="form-group">
-                            <label for="client_name">Client Name</label>
-                            <input type="text" class="form-control" id="client_name" wire:model="client_name">
-                            @error('client_name') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="table_id">Table</label>
-                            <select class="form-control" id="table_id" wire:model="table_id">
-                                <option value="">Select Table</option>
-                                @foreach($tables as $table)
-                                <option value="{{ $table->id }}">{{ $table->number }}</option>
-                                @endforeach
-                            </select>
-                            @error('table_id') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="reservation_date">Reservation Date</label>
-                            <input type="datetime-local" class="form-control" id="reservation_date"
-                                wire:model="reservation_date">
-                            @error('reservation_date') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <button type="submit" class="btn btn-primary">{{ $isEditMode ? 'Update' : 'Save' }}</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <livewire:footer />
 </div>

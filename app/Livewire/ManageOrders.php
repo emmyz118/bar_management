@@ -29,64 +29,32 @@ class ManageOrders extends Component
         return view('livewire.admin.manage-orders', compact('orders'));
     }
 
-    public function saveOrder()
-    {
-        $this->validate();
-
-        Order::create([
-            'client_name' => $this->client_name,
-            'beverage_id' => $this->beverage_id,
-            'table_id' => $this->table_id,
-            'status' => $this->status,
-        ]);
-
-        session()->flash('message', 'Order added successfully.');
-
-        $this->resetForm();
-        $this->emit('closeModal'); // Close modal using JS event
-    }
-
-    public function editOrder($id)
-    {
-        $order = Order::findOrFail($id);
-        $this->orderId = $order->id;
-        $this->client_name = $order->client_name;
-        $this->beverage_id = $order->beverage_id;
-        $this->table_id = $order->table_id;
-        $this->status = $order->status;
-        $this->isEditMode = true;
-    }
-
-    public function updateOrder()
-    {
-        $this->validate();
-
-        $order = Order::findOrFail($this->orderId);
-        $order->update([
-            'client_name' => $this->client_name,
-            'beverage_id' => $this->beverage_id,
-            'table_id' => $this->table_id,
-            'status' => $this->status,
-        ]);
-
-        session()->flash('message', 'Order updated successfully.');
-
-        $this->resetForm();
-        $this->emit('closeModal');
-    }
-
+    
     public function deleteOrder($id)
     {
         Order::findOrFail($id)->delete();
         session()->flash('message', 'Order deleted successfully.');
     }
 
-    public function resetForm()
+ public function completeReservation($id)
     {
-        $this->client_name = '';
-        $this->beverage_id = '';
-        $this->table_id = '';
-        $this->status = '';
-        $this->isEditMode = false;
+        $reservation = Order::findOrFail($id);
+        $reservation->status='Completed';
+        $reservation->save();
+
+
+        session()->flash('message', "$reservation->client_name's Order marked as completed.".$id);
+        return $this->redirect(route("admin.orders"),navigate:true);
     }
+
+    public function rejectReservation($id)
+    {
+        $reservation = Order::findOrFail($id);
+         $reservation->status='Rejected';
+        $reservation->save();
+
+        session()->flash('message', 'Order rejected.');
+        return $this->redirect(route("admin.orders"),navigate:true);
+    }
+
 }

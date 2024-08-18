@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <link rel="icon" href="../Bar.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,15 +30,15 @@
         <livewire:layout.navigation />
 
         <!-- Page Heading -->
-        @if (isset($header))
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
+
+        <header class="bg-dark text-white-50 shadow">
+            <div class="max-w-7xl mx-auto py-2 px-4">
+                {{str_replace("/",">>", request()->path())}}
             </div>
         </header>
-        @endif
 
         <!-- Page Content -->
+        @livewireScripts
         <main>
             {{ $slot }}
         </main>

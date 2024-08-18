@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="mt-4">Manage Beverages</h1>
+    <h1 class="m-4">Manage Beverages</h1>
     @if (session()->has('message'))
     <div class="alert alert-success">
         {{ session('message') }}

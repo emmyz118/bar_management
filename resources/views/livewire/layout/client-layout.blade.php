@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" href="./Bar.ico" type="image/x-icon">
+
     <!-- Include Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
@@ -91,10 +91,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route("client.beverages")}}" wire:navigate>Beverages</a>
+                    <a class="nav-link {{ Route::is('client.beverages') ? 'active bg-dark text-white' : '' }}"
+                        href="{{route("client.beverages")}}" wire:navigate>Beverages</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route("client.tables")}}" wire:navigate>Tables</a>
+                    <a class="nav-link {{ Route::is('client.tables') ? 'active bg-dark text-white' : '' }}"
+                        href="{{route("client.tables")}}" wire:navigate>Tables</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Order</a>
@@ -103,11 +105,10 @@
         </div>
     </nav>
 
+
     <main>
-        @livewireScripts
         {{$slot}}
     </main>
-
     <!-- Include Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

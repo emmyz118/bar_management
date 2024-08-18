@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\BarStat;
 use App\Livewire\Dashboard;
 use App\Livewire\ListTables;
 use App\Livewire\UssdHandler;
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Http\Controllers\ussdClientController;
 Route::view('/admin', 'welcome');
 
-Route::get('dashboard', Dashboard::class)
+Route::get('/admin/dashboard', Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -36,4 +37,5 @@ Route::view('profile', 'livewire.admin.profile')
 
     return $component->render();
 });
+Route::get("/stat",BarStat::class);
 require __DIR__.'/auth.php';
