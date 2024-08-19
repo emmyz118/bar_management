@@ -37,5 +37,4 @@ Route::view('profile', 'livewire.admin.profile')
 
     return $component->render();
 });
-Route::get("/stat",BarStat::class);
 require __DIR__.'/auth.php';

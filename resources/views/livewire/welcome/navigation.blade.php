@@ -10,8 +10,8 @@
     <div class="col-lg-5">
         <nav class="flex flex-1 justify-end float-end">
             @auth
-            <a href="{{ url('/dashboard') }}" wire:navigate
-                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+            <a href="{{ url('/admin/dashboard') }}" wire:navigate
+                class="rounded-md px-3 py-2 text-black text-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                 Dashboard
             </a>
             @else
